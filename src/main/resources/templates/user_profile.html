@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Страница пользователя</title>
+</head>
+<body>
+
+<form method="POST" th:action="@{/logout}" th:object="${user}">
+
+    <div class="main block">
+
+        <h3>User page</h3>
+
+        <div class="field">
+            <label for="username">Имя</label>
+            <input type="username" th:field="*{username}" id="username"/>
+        </div>
+
+        <div>
+            <label>Roles:
+                <input type="checkbox" name="roles"
+                       th:each="role: ${userRoles}"
+                       th:text="${role.getRole()}"
+                       th:value="${role.getId()}"
+                       th:field="*{roles}"/>
+            </label>
+        </div>
+
+        <br>
+        <form th:method="POST" th:action="@{/logout}">
+            <input type="submit" value="Выйти из системы"/>
+        </form>
+
+    </div>
+</form>
+</body>
+</html>

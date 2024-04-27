@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:c="">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <title>Users</title>
+    </head>
+    <body>
+        <div align="center">
+            <h2>Users</h2>
+            <h3><a href="/new">New User</a></h3>
+            <table border="2" cellpadding="10">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Roles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:utext = "${user.getId()}"></td>
+                        <td th:utext = "${user.getUsername()}"></td>
+                        <td th:utext = "${user.getPassword()}"></td>
+                        <td th:utext = "${user.getRoles()}"></td>
+                        <td>
+                            <form th:method = "GET" th:action="@{/admin/edit/{id}(id=${user.getId()})}">
+                                <input type = "submit" value = "Edit user"/>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
+                                <input type = "hidden" name = "method" value = "DELETE"/>
+                                <input type = "submit" value = "Delete user"/>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <form th:method="GET" th:action="@{/admin/new}">
+                    <input type = "submit" value = "Add new user"/>
+                </form>
+            </div>
+            <div>
+                <form th:method="POST" th:action="@{/logout}">
+                    <input type = "submit" value = "Logout"/>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

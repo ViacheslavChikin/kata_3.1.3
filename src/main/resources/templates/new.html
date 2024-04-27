@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>New user</title>
+    </head>
+    <body>
+
+    <h1>New user</h1>
+
+    <form th:method="POST" th:action="@{/admin/create}" th:object="${user}">
+
+        <label for="username"> Name</label>
+        <input type="text" th:field="*{username}" id="username"/>
+        <!--        <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Ошибка в имени</div>-->
+        <br/>
+
+        <label for="password"> Password: </label>
+        <input type="text" th:field="*{password}" id="password"/>
+        <!--        <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка в пароле</div>-->
+        <br/>
+
+        <label for="role">Role 1 (ADMIN) or 2 (USER) ?</label>
+        <input type="text" th:field="*{roles}" id="role">
+        <!--        <div style="color:red" th:if="${#fields.hasErrors('role')}" th:errors="*{roles}">Ошибка в выборе роли</div>-->
+        <br/>
+
+        <input type="submit" value="Create"/>
+
+    </form>
+
+    <form th:method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
+    </form>
+
+    </body>
+    </html>
